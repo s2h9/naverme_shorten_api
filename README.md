@@ -22,3 +22,9 @@ Response
   }
 }
 ```
+```json
+{
+  "success": false,
+  "error": "failed to fetch"
+}
+```
