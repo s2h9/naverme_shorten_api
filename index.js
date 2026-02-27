@@ -16,7 +16,7 @@ app.get("/shorten", async (req, res) => {
 
     const targetUrl =
       `https://me2do.naver.com/common/requestJsonpV2.nhn` +
-      `?svcCode=0&url=https://link.naver.com/bridge?url=${encodeURIComponent(url)}`;
+      `?svcCode=0&url=${encodeURIComponent(url)}`;
 
     const response = await axios.post(targetUrl, null, {
       headers: {
