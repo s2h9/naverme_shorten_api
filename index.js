@@ -13,11 +13,14 @@ app.get("/shorten", async (req, res) => {
     if (!url) {
       return res.status(400).json({ error: "url parameter needed." });
     }
-    url = `https://link.naver.com/bridge?url=${url}`;
+    const originalUrl = url;
+    const bridgeUrl =
+      `https://link.naver.com/bridge?url=${encodeURIComponent(originalUrl)}` +
+      `&dst=${encodeURIComponent(originalUrl)}`;
 
     const targetUrl =
       `https://me2do.naver.com/common/requestJsonpV2.nhn` +
-      `?svcCode=0&url=${encodeURIComponent(url)}&dst=${encodeURIComponent(url)}`;
+      `?svcCode=0&url=${encodeURIComponent(bridgeUrl)}`;
 
     const response = await axios.post(targetUrl, null, {
       headers: {
