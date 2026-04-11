@@ -8,14 +8,15 @@ app.get("/", async (req, res) => {
 });
 app.get("/shorten", async (req, res) => {
   try {
-    const { url } = req.query;
+    let { url } = req.query;
 
     if (!url) {
       return res.status(400).json({ error: "url parameter needed." });
     }
+    url = `https://link.naver.com/bridge?url=${url}`;
 
     const targetUrl =
-      `https://me2do.naver.com/common/requestJsonpV2.nhn?svcCode=0&url=https://me2do.naver.com/common/requestJsonpV2.nhn` +
+      `https://me2do.naver.com/common/requestJsonpV2.nhn` +
       `?svcCode=0&url=${encodeURIComponent(url)}&dst=${encodeURIComponent(url)}`;
 
     const response = await axios.post(targetUrl, null, {
